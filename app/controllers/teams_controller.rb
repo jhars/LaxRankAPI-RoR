@@ -1,4 +1,6 @@
 class TeamsController < ApplicationController
+  
+
   def index
   	    #IMport Team Objects from NodeServer
     @response = HTTParty.get('http://laxapi.herokuapp.com/api/teams')
@@ -6,22 +8,23 @@ class TeamsController < ApplicationController
       format.html{render :index}
       format.json{render json: @response}
     end
-    puts @response #.count
+    # puts response
+    team_data = @response
+    # Service
+    create_all_teams_service = CreateTeamService.new
+    create_all_teams_service.create_team_objects(team_data)
 
+   end
 
-    def create
-# TEAM LOOPER-DOOPER
-# Create all 3,714 Teams in one Swoop
-    	# Do I Put Iterations through a SERVICE/factory?
-    	# should Define/Create Team Object here?
-    	# for i in 
-
-
-    end
+   def create
 
 
 
+   end
 
 
-  end
+
+
+
+
 end
