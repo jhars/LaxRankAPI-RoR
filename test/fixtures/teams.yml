@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  team_name: MyString
+  state: MyString
+  nat_rank: 1
+  wins: 1
+  losses: 1
+  ties: 1
+  power_rating: 1.5
+  team_url: MyString
+
+two:
+  team_name: MyString
+  state: MyString
+  nat_rank: 1
+  wins: 1
+  losses: 1
+  ties: 1
+  power_rating: 1.5
+  team_url: MyString
