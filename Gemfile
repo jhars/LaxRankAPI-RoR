@@ -44,5 +44,6 @@ group :development, :test do
 
   gem 'httparty'
   gem 'json'
+  gem 'grape'
 end
 

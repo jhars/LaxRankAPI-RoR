@@ -3,6 +3,7 @@ class TeamsController < ApplicationController
 
   def index
   	    #IMport Team Objects from NodeServer
+        # Probably put this into a SERVICE
     @response = HTTParty.get('http://laxapi.herokuapp.com/api/teams')
     respond_to do |format|
       format.html{render :index}
