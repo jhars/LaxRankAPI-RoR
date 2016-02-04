@@ -43,7 +43,11 @@ group :development, :test do
   gem 'spring'
 
   gem 'httparty'
+
   gem 'json'
   gem 'grape'
+
+  gem 'pry'
+  gem 'nokogiri', '~> 1.6', '>= 1.6.6.2'
 end
 

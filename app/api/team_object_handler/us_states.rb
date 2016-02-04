@@ -14,22 +14,22 @@ module TeamObjectHandler
 		# }
 
 		helpers do
-			def get_teams_in_state
-				Team.where(state: "MI")
+			def get_teams_in_state(state)
+				Team.where(state: "#{state}")
 			end
 		end
 
 		resource :us_states do
-			get do
-				# Team.all
-				get_teams_in_state
-				# "Print Team Object here, "
+			params do
+				requires :state, type: String
+				# localhost3000/api/team_object_handler/us_states?state=STRING
 			end
 			
-			# params do
-				# requires :state, type: String
-				# localhost3000/api/team_object_handler/us_states?state=STRING
-			# end
+			get do
+				get_teams_in_state(params[:state])
+			end
+			
+
 			# -> notice how this is nested in "resource"
 			# 	> see 'exchange' on converter > ... > currency.rb
 
