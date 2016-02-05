@@ -14,7 +14,7 @@ class CreateTeamSchedule
 		score_array = []
 		data_array = []
 		team_data = [Team.all]
-
+		schedule_hash = Hash.new
 
 		# SCORE-SCRAPER
 		parse_page.css('.team_table > tbody > tr > td.score').map do |a|
@@ -27,6 +27,8 @@ class CreateTeamSchedule
 			data_array.push(a.attributes["href"].value)
 			post_name = a.text
 			schedule_array.push(post_name)
+			#saving team_name & link to Hash (key, value)
+			schedule_hash["#{post_name}"] = a.attributes["href"].value
 		end
 
 		Pry.start(binding)
@@ -34,8 +36,8 @@ class CreateTeamSchedule
 	end
 
 	def save_schedule
-
 	end
+
 
 end
 
