@@ -21,3 +21,5 @@ Additons:
 3) @team[:team_name] = item["teamName"].split(/\s +\z/)[0]
 
 4) Route Working -- See Terminal for Result: get `schedule/index`
+
+4.5) Outlined Single Game Schedule Object

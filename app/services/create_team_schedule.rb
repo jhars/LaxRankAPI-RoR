@@ -56,7 +56,6 @@ class CreateTeamSchedule
 		puts "Away Points: #{schedule_data[0][:away_score]}"
 		puts "==================================="
 		# puts "All Scores: #{schedule_data}"
-
 	end
 
 	def format_game_results(raw_scores)
