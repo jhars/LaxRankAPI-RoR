@@ -1,28 +1,21 @@
-== README
+1) git clone https://github.com/jhars/LaxRankAPI-RoR
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+2) bundle
 
-Things you may want to cover:
+3) rake db:create
 
-* Ruby version
+4) rake db:migrate
 
-* System dependencies
+5) @'/teams/index' route creates All Teams in DB
 
-* Configuration
+6) `rails c` -> `Team.all()` shows all teams
 
-* Database creation
+----------------
 
-* Database initialization
+Additons:
 
-* How to run the test suite
+1) gem "awesome_print", require:"ap"
 
-* Services (job queues, cache servers, search engines, etc.)
+2) Add to `TeamsController` => skip_before_action :verify_authenticity_token
 
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+3) @team[:team_name] = item["teamName"].split(/\s +\z/)[0]

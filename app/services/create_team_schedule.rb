@@ -10,7 +10,7 @@ class CreateTeamSchedule
 	def scrape_schedule
 # http://laxpower.com/update15/binboy/XCRAMI.PHP'
 		page = HTTParty.get('http://laxpower.com/update15/binboy/XCRAMI.PHP')
-		parse_page = Nokogiri::HTML(page)
+		html_page = Nokogiri::HTML(page)
 #-------------------------------------#
 # available objects in term.
 		schedule_object = Hash.new
@@ -25,13 +25,13 @@ class CreateTeamSchedule
 		home_or_away_array = []
 #-------------------------------------#
 # SCORE-SCRAPER
-		parse_page.css('.team_table > tbody > tr > td.score').map do |data|
+		html_page.css('.team_table > tbody > tr > td.score').map do |data|
 			score = data.text
 			score_array.push(score)
 		end
 # OPPONENT-SCRAPER
-		# parse_page.css('.team_table > tbody > tr > td.opponent').map do |data|
-		parse_page.css('.team_table > tbody > tr').map do |data|
+		# html_page.css('.team_table > tbody > tr > td.opponent').map do |data|
+		html_page.css('.team_table > tbody > tr').map do |data|
 			opp_data_array.push(data)
 			game_date_array.push(data.children.children[0])
 			opp_name_array.push(data.children.children[2].children[0])
@@ -44,15 +44,44 @@ class CreateTeamSchedule
 			# Opp Power-Rating
 			# Win Or Loss?
 			opp_league_array.push(data.children[5].children)# Opp League - requires clean up
-			opp_record_array.push(data.children.children[3])# Opp Record - requires clean up
+			opp_record_array.push(data.children.children[3])
+			# Opp Record - requires clean up
+			# data.children.children[3]
 # - - - - - - - - - - - - - - - - #
 		end
+		puts "- - - - - - - CHECK POINT 01 - - - - - - - - - "
 # ================================================== #
 		# schedule_object["scores"] = temp_scores
 		# schedule_object["home_away"] = temp_home_away
 		# schedule_object["result"] = temp_results
 # ================================================== #
-		Pry.start(binding)
+		# schedule_object[:data] = opp_data_array
+		# puts opp_data_array
+		# puts opp_name_array
+		# puts opp_link_array
+		# puts opp_league_array
+
+		puts " Oppionent Record Data: "
+		puts opp_record_array
+		# record = opp_record_array.last.text
+		record = opp_record_array.first.text
+		puts record.length
+		puts record
+		parsed_record = record.split(/\A\s+\W.\D/)[1].chomp(')')
+		
+		puts "======================================="
+		puts "Parsed Record: #{parsed_record}"
+		
+		puts "- - - - - - - CHECK POINT 02 - - - - - - - - - "
+		
+		puts "Game Date: "
+		puts game_date_array
+		game_date = game_date_array.last.text
+		puts game_date.class
+		puts game_date.length
+		
+		puts "- - - - - - - CHECK POINT 03 - - - - - - - - - "
+		# Pry.start(binding)
 	end
 
 # 	def save_schedule

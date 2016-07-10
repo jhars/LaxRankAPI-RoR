@@ -1,11 +1,12 @@
 class CreateTeamService
     
     def create_team_objects(team_data)
+        Team.delete_all
         team_data.each do |item|
             @team = Team.new
             
             if item["teamName"] != "NaN"
-                @team[:team_name] = item["teamName"]
+                @team[:team_name] = item["teamName"].split(/\s +\z/)[0]
                 @team[:state] = item["state"]
             
                 @team[:nat_rank] = item["natRank"].to_i

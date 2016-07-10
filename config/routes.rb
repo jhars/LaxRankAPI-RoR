@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   mount TeamObjectHandler::UsStates => '/'
   
   get  'teams/index'
-  post '/nat_rank_teams', to: 'teams#create'
+  get 'nat_rank_teams', to: 'teams#create'
   root 'all_states#index'
 
 

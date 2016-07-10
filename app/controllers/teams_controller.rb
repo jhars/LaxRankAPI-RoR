@@ -1,26 +1,24 @@
 class TeamsController < ApplicationController
+
+  skip_before_action :verify_authenticity_token
+
+  def initialize
+  end
   
 
   def index
-  	    #IMport Team Objects from NodeServer
-        # Probably put this into a SERVICE
-    @response = HTTParty.get('http://laxapi.herokuapp.com/api/teams')
     respond_to do |format|
-      format.html{render :index}
-      format.json{render json: @response}
+      format.json{render json: Team.all}
     end
-    # puts response
-    team_data = @response
-    # Service
-    create_all_teams_service = CreateTeamService.new
-    create_all_teams_service.create_team_objects(team_data)
-
    end
 
    def create
-
-
-
+    @response = HTTParty.get('http://laxapi.herokuapp.com/api/teams')
+    CreateTeamService.new.create_team_objects(@response)
+    render :json => {
+      :message => " #{Team.count} teams have been created",
+      status: 200
+      }
    end
 
 
