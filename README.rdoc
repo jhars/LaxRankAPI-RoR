@@ -19,3 +19,5 @@ Additons:
 2) Add to `TeamsController` => skip_before_action :verify_authenticity_token
 
 3) @team[:team_name] = item["teamName"].split(/\s +\z/)[0]
+
+4) Route Working -- See Terminal for Result: get `schedule/index`
