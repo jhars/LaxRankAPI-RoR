@@ -23,3 +23,12 @@ Additons:
 4) Route Working -- See Terminal for Result: get `schedule/index`
 
 4.5) Outlined Single Game Schedule Object
+
+----------------
+
+5) CreateTeamSchedule.new.scrape_team_schedule(i.laxid)
+- creates Schedules for ALL Teams
+- in schedule Controller
+- Currently, its 2015
+
+6) Paramaters For User
