@@ -5,6 +5,7 @@ class CreateTeamService
     team_data.each do |item|
       @team = Team.new
       if item["teamName"] != "NaN"
+        @team[:laxid] = item["teamURL"].split('.')[0]
         @team[:team_name] = item["teamName"].split(/\s +\z/)[0]
         @team[:state] = item["state"]
         @team[:nat_rank] = item["natRank"].to_i
