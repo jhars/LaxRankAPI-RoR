@@ -18,23 +18,44 @@ class CreateTeamSchedule
 		@laxid
 	end
 
-	def scrape_team_schedule
-		fetch_schedule_data
+	def scrape_team_schedule(laxid)
+		fetch_schedule_data(laxid)
 		@schedule_data = game_score
 		score_arr_length = (@scores.length-1)/3
 		puts score_arr_length
 		for i in 0..score_arr_length do
 			@schedule_array.push(single_opponents_data(i))
 		end
-		# @team_schedule[:games] = @schedule_array
 		create_team_schedule
-		# puts ap @team_schedule
+	end
+
+	def fetch_schedule_data(laxid)
+		page = HTTParty.get("http://laxpower.com/update15/binboy/#{laxid}.PHP")
+		html_page = Nokogiri::HTML(page)
+######################################################################
+# SCORE-SCRAPER
+		html_page.css('.team_table > tbody > tr > td.score').map do |data|
+			game_result = {}
+			game_result[:home_score] = data.text
+			game_result[:away_score] = data.text
+			@scores.push(data.text)
+		end
+######################################################################
+# OPP-SCRAPER
+		html_page.css('.team_table > tbody > tr').map do |data|
+			@game_date_array.push(data.children.children[0])
+			@opp_name_array.push(data.children.children[2].children[0])
+			@opp_link_array.push(data.children.children[2].attributes["href"].value)
+			@opp_league_array.push(data.children[5].children)
+			@opp_record_array.push(data.children.children[3])
+		end
+######################################################################
+		@laxid = laxid
 	end
 
 	def create_team_schedule
 		@schedule = Schedule.new
 		@schedule[:games] = @schedule_array
-		# @schedule[:game_array] = @schedule_array
 		@schedule[:laxid] = @laxid
 		@schedule.save
 	end
@@ -73,38 +94,8 @@ class CreateTeamSchedule
 		end
 		season_scores
 	end
-
-	def fetch_single_game_result(game_score)
-
-	end
-
 #ITERATE THROUGH THESE METHODS
-	def fetch_schedule_data(url="XCRAMI")
-		page = HTTParty.get("http://laxpower.com/update15/binboy/#{url}.PHP")
-		html_page = Nokogiri::HTML(page)
-######################################################################
-######################################################################
-# SCORE-SCRAPER
-		html_page.css('.team_table > tbody > tr > td.score').map do |data|
-			game_result = {}
-			game_result[:home_score] = data.text
-			game_result[:away_score] = data.text
-			@scores.push(data.text)
-		end
-######################################################################
-######################################################################
-# OPP-SCRAPER
-		html_page.css('.team_table > tbody > tr').map do |data|
-			@game_date_array.push(data.children.children[0])
-			@opp_name_array.push(data.children.children[2].children[0])
-			@opp_link_array.push(data.children.children[2].attributes["href"].value)
-			@opp_league_array.push(data.children[5].children)
-			@opp_record_array.push(data.children.children[3])
-		end
-######################################################################
-######################################################################
-		@laxid = url
-	end
+
 
 	def single_opponents_data(i)
 		{
