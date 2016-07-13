@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
 
-  get 'schedule/index'
+  get 'schedule/create'
+  get 'schedule/show'
 
   mount TeamObjectHandler::UsStates => '/'
   
   get  'teams/index'
+  get 'teams/show'
   get 'nat_rank_teams', to: 'teams#create'
   root 'all_states#index'
 
