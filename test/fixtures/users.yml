@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  email: MyString
+  team: MyString
+  state: MyString
+  league: MyString
+  favorite_teams: MyString
+
+two:
+  email: MyString
+  team: MyString
+  state: MyString
+  league: MyString
+  favorite_teams: MyString

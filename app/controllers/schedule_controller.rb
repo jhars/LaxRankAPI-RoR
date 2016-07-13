@@ -21,7 +21,7 @@ class ScheduleController < ApplicationController
 
 ########################################################
 ########################################################
-  def create_one_schedule(laxid="XLYWCA")
+  def create_one_schedule(laxid="XCRAMI")
 		# 1 Team/Schedule -- Test Code #
   	CreateTeamSchedule.new.scrape_team_schedule(laxid)
   end

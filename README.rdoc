@@ -31,4 +31,47 @@ Additons:
 - in schedule Controller
 - Currently, its 2015
 
-6) Paramaters For User
+6) Add Params to Single Team+Schedule Routes
+
+7) Paramaters For User - NEED TO CREATE USER
+
+User Object Model:
+
+user_id:String
+
+rails g model user email:string team:string state:string league:string favorite_teams:array
+
+email:string
+team:string
+state:string
+league:string
+favorite_teams:array
+
+favorite
+
+my_profile:String (serialize)
+	my_team:laxid
+	my_state:String
+	division:String
+	favorite_teams:Array=>[laxid01, laxid02]
+
+	
+	my_team:string
+	my_state:string
+	division:string
+	favorite_teams:array
+
+
+*** IMPORTANT NOTE ***
+
+Pribably Need to Redo User Model/CONTROLLER with proper Pluralization
+
+*****    *****    *****    *****    *****    *****    *****    *****
+
+
+
+----------------------
+User Objects Stretch:
+----------------------
+:chatroom_id_array
+:fb_id

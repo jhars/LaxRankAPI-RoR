@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'users/create'
+
+  get 'users/show'
+
+  get 'users/index'
+
   get 'schedule/create'
   get 'schedule/show'
 
