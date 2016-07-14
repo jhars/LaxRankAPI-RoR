@@ -1,4 +1,4 @@
-class CreateTeamSchedule
+class CreateScheduleService
 	
 	require 'httparty'
 	require 'nokogiri'

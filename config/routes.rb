@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   get 'schedule/create'
   get 'schedule/show'
+  get 'schedule/create_one'
 
   mount TeamObjectHandler::UsStates => '/'
   
