@@ -1,5 +1,4 @@
 class TeamsController < ApplicationController
-  skip_before_action :verify_authenticity_token
   
   # Displays/Serves all Teams JSON Object
   def index
@@ -10,7 +9,6 @@ class TeamsController < ApplicationController
 
   # Shows One Team Based on URL Parameters
   def show
-    puts params
     laxid = params[:laxid]
     @team = Team.all.where(laxid: laxid).last[:team_name]
     puts @team
