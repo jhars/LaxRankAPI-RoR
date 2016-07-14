@@ -62,9 +62,18 @@ my_profile:String (serialize)
 	favorite_teams:array
 
 
-*** IMPORTANT NOTE ***
+*** IMPORTANT NOTES ***
+***********************
 
-Pribably Need to Redo User Model/CONTROLLER with proper Pluralization
+
++ Probably Need to Redo User Model/CONTROLLER with proper Pluralization
+
+
++ Pulled from UsersController#Create Method:
+-------------------------------------------
+@user[:league] =  nil # AUTOMATICALLY SET TO 'nil' from via User Model
+
+
 
 *****    *****    *****    *****    *****    *****    *****    *****
 
@@ -75,3 +84,37 @@ User Objects Stretch:
 ----------------------
 :chatroom_id_array
 :fb_id
+
+
+*****    *****    *****    *****    *****    *****    *****    *****
+*****    *****    *****    *****    *****    *****    *****    *****
+*****    *****    *****    *****    *****    *****    *****    *****
+______
+TO DO:
+_____________________________________________________________________
+_____________________________________________________________________
+
+
+
+Create Routes For:
+-------------------
+-> 'Get' STATE Rankings
+-> 'Get' League Rankings
+
+-> CRUD Routing >> {Get, Post, Put, Delete}
+	+ favorite_team
+	+ my_team(sets division+State!)
+
+
+
+Current User:
+--------------
+-> ADD TO  CurrentUser Data (Favorite Teams + Saved States/Leagues) --Clean Nav Menu Experience!
+
+
+Next Steps:
+-----------
+-> UI/UX Design
+
+
+

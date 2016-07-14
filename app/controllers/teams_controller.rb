@@ -8,6 +8,7 @@ class TeamsController < ApplicationController
     end
   end
 
+  # Shows One Team Based on URL Parameters
   def show
     puts params
     laxid = params[:laxid]
