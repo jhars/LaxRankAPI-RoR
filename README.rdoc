@@ -110,11 +110,10 @@ Create Routes For:
 Current User:
 --------------
 -> ADD TO  CurrentUser Data (Favorite Teams + Saved States/Leagues) --Clean Nav Menu Experience!
-
+-> Create Session ID (Will take some time ramp up)
 
 Next Steps:
 -----------
 -> UI/UX Design
-
 
 
