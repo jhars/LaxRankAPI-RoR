@@ -20,15 +20,15 @@ class UsersController < ApplicationController
   end
 
   def index
-    User.all
+    respond_to do |format|
+      format.json{render json: User.all}
+    end
   end
 
+####### HELPER METHODS ##########
   def find_state
     @my_team_state  = Team.all.where(laxid: params[:my_team]).last.state
   end
-
-
-
 end
 
 

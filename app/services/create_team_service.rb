@@ -1,4 +1,6 @@
 class CreateTeamService
+# TO-DO #
+# + @team[:league]
 
   def create_team_objects(team_data)
     Team.delete_all
