@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
  	def create
 		user = User.find_by_email(params[:email])
 		# If the user exists AND the password entered is correct.
-		# http://localhost:3000/users/create?email=laxer9@gmail.com&my_team=XCRAMI&favorite_teams=[]&password=test
+		# http://localhost:3000/users/create?email=laxer20@gmail.com&my_team=XCRAMI&favorite_teams[]=1,2,3&password=test
 		if user && user.authenticate(params[:password])
 			# Save the user id inside the browser cookie. This is how we keep the user 
 			# logged in when they navigate around our website.
