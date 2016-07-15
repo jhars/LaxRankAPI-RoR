@@ -8,6 +8,10 @@ module UsersHelper
 		params[:user_id].to_i
 	end
 
+	def user_state
+		params[:state].to_s
+	end
+
 	def team_laxid
 		params[:laxid].to_s
 	end
@@ -26,6 +30,10 @@ module UsersHelper
 
 	def remove_my_team(user)
 	  user.team = nil
+	end
+
+	def remove_state(user)
+	  user.state = nil
 	end
 
 

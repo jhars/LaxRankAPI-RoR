@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   include UsersHelper
     skip_before_action :verify_authenticity_token
   
-  # Example URL Request:
-  # http://localhost:3000/users/create?email=laxer3@gmail.com&my_team=XCRAMI&favorite_teams=["XBROMI","XEGRMI"]
   def create
+    # Example URL Request:
+    # http://localhost:3000/users/create?email=laxer3@gmail.com&my_team=XCRAMI&favorite_teams=["XBROMI","XEGRMI"]
   	@user = User.new
   	@user[:email] = params[:email] #"lax0@lax.com"
   	@user[:team] = params[:my_team] #"XCRAMI"
@@ -31,9 +31,7 @@ class UsersController < ApplicationController
     # http://localhost:3000/users/add_favorite_team?laxid=XBROMI&user_id=1
     @user = User.all.where(id: user_id).last
     @user.favorite_teams.append(team_laxid) if !team_laxid.include?(",")
-    
     teams = team_laxid.split(",")
-    puts "Param is an ARRAY! -- Hooray :-P"
     add_multiple_teams(teams) if teams.is_a?(Array)
     
     @user.save
@@ -47,9 +45,7 @@ class UsersController < ApplicationController
     # http://localhost:3000/users/remove_favorite_team?laxid=XBROMI&user_id=1
     @user = User.all.where(id: user_id).last
     @user.favorite_teams.delete(team_laxid) if !team_laxid.include?(",")
-
     teams = team_laxid.split(",")
-    puts "Param is an ARRAY! -- Hooray :-P"
     remove_multiple_teams(teams) if teams.is_a?(Array)
     
     @user.save
@@ -63,7 +59,20 @@ class UsersController < ApplicationController
     @user = User.all.where(id: user_id).last
     remove_my_team(@user)
     @user.team  = team_laxid
+    
     @user.save
+    respond_to do |format|
+      format.json{render json: @user}
+    end
+  end
+
+  def set_my_state
+    # http://localhost:3000/users/set_my_state?state=RI&user_id=2
+    @user = User.all.where(id: user_id).last
+    remove_state(@user)
+    @user.state = user_state
+    @user.save
+
     respond_to do |format|
       format.json{render json: @user}
     end

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'users/add_favorite_teams'
   get 'users/remove_favorite_teams' #should be POST or PUT route probabaly...
   get 'users/set_my_team'
+  get 'users/set_my_state'
 
   get 'schedule/create'
   get 'schedule/show'
