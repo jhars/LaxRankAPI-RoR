@@ -1,6 +1,6 @@
 module UsersHelper
 	
-	def find_state
+	def find_state(team_laxid)
 	  @my_team_state  = Team.all.where(laxid: team_laxid).last.state
 	end
 

@@ -50,6 +50,7 @@ group :development, :test do
   gem 'pry'
   gem 'nokogiri', '~> 1.6', '>= 1.6.6.2'
   gem "awesome_print", require:"ap"
+  gem 'bcrypt', '~> 3.1.7'
 
 end
 

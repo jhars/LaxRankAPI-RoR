@@ -8,10 +8,23 @@ class UsersController < ApplicationController
   	@user = User.new
   	@user[:email] = params[:email] #"lax0@lax.com"
   	@user[:team] = params[:my_team] #"XCRAMI"
-  	@user[:state] =  find_state
-  	@user[:favorite_teams] = params[:favorite_teams]
+  	@user[:state] =  find_state(@user[:team])
+  	@user[:favorite_teams] = params[:favorite_teams].to_a
+    @user[:password_digest] = params[:password_digest]
   	@user.save
-  	puts @user
+
+    if @user.save
+      session[:user_id] = @user.id
+      puts session.id
+      respond_to do |format|
+        format.json{render json: @user}
+      end
+    else
+      respond_to do |format|
+        format.json{render json: "Error 404, Unable to create User"}
+      end
+    end
+
   end
 
   def show
@@ -24,6 +37,10 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.json{render json: User.all}
     end
+  end
+
+  def edit
+
   end
 
   def add_favorite_teams
