@@ -1,4 +1,5 @@
 class CreateScheduleService
+	include ScheduleHelper
 	
 	require 'httparty'
 	require 'nokogiri'
@@ -18,12 +19,13 @@ class CreateScheduleService
 		@laxid
 	end
 
+######################################################################################################
+######################################################################################################
 	def scrape_team_schedule(laxid)
 		scrape_schedule(laxid)
 		create_team_schedule
 	end
-#####################################################################################################
-######################################################################################################
+
 	def create_team_schedule
 		@schedule = Schedule.new
 		@schedule[:games] = @schedule_array
@@ -38,9 +40,11 @@ class CreateScheduleService
 			:opp_record => @opp_record_array[i].text.split(/\A\s+\W.\D/)[1].chomp(')'),
 			:opp_league => @opp_league_array[i].text.match(/\w{2}.\S\s+\w+\S*/).to_s,
 			:game_date => @game_date_array[i].text.split(/\s/)[0],
-			:scores => score_formatter[i]
+			:scores => score_formatter[i],
+			:location => determine_home_away(i)
 		}
 	end
+
 ######################################################################################################
 ######################################################################################################
 # HTML PAGE SCRAPERS
@@ -100,8 +104,6 @@ class CreateScheduleService
 			@schedule_array.push(single_opponents_data(i))
 		end
 	end
-
-
 ######################################################################################################
 ######################################################################################################
 end
