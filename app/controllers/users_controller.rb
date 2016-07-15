@@ -14,19 +14,15 @@ class UsersController < ApplicationController
   	@user[:team] = params[:my_team] #"XCRAMI"
   	@user[:state] =  find_state(@user[:team])
   	@user[:favorite_teams] = params[:favorite_teams].to_a
-    # @user[:password_digest] = params[:password]
     @user[:password_digest] = BCrypt::Password.create(params[:password].to_s)
   	@user.save
 
     if @user.save
       session[:user_id] = @user.id
-      puts session.id
-
       my_password = BCrypt::Password.create("test")
       puts my_password == "test"
       # HERE #
-      puts "URL Hashed PW: #{@user[:password_digest]}"
-
+      
       respond_to do |format|
         format.json{render json: @user}
       end
@@ -35,7 +31,6 @@ class UsersController < ApplicationController
         format.json{render json: "Error 404, Unable to create User"}
       end
     end
-
   end
 
   def login
